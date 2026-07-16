@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InvestTable } from './invest-table';
+import { Header } from './header';
 
-describe('InvestTable', () => {
-  let component: InvestTable;
-  let fixture: ComponentFixture<InvestTable>;
+describe('Header', () => {
+  let component: Header;
+  let fixture: ComponentFixture<Header>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InvestTable],
+      imports: [Header],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(InvestTable);
+    fixture = TestBed.createComponent(Header);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

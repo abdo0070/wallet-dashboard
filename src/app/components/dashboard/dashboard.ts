@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { InvestList } from "../../invest/invest-list/invest-list";
 
-@Component({
+@Component({  
   selector: 'app-dashboard',
-  imports: [],
+  imports: [InvestList],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

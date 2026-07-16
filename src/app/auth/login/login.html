@@ -1,1 +1,79 @@
-<p>login works!</p>
+<div class="bg-[#12151C] min-h-screen flex items-center justify-center p-6">
+
+  <div class="w-full max-w-sm">
+
+    <!-- Wordmark -->
+    <div class="flex items-center gap-2 mb-6 pl-1">
+      <div class="w-2 h-2 rounded-full bg-[#E8A33D]"></div>
+      <span class="font-mono text-xs tracking-widest text-[#8A90A2] uppercase">Secure Access</span>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-[#1B1F2A] border border-white/5 rounded-xl overflow-hidden shadow-2xl">
+
+      <!-- Terminal-style top bar -->
+      <div class="flex items-center gap-1.5 px-4 py-3 border-b border-white/5 bg-black/20">
+        <span class="w-2.5 h-2.5 rounded-full bg-[#E8A33D]/70"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-white/15"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-white/15"></span>
+        <span class="ml-2 font-mono text-[11px] text-[#5A5F6E]">session · not authenticated</span>
+      </div>
+
+      <div class="p-7">
+        <h1 class="text-2xl font-semibold text-[#EDEFF3]">Sign in</h1>
+        <p class="text-sm text-[#8A90A2] mt-1 mb-6">Enter your credentials to continue.</p>
+
+        <form  (ngSubmit)="onSubmit()" novalidate class="space-y-4">
+
+          <div>
+            <label for="username" class="block text-xs font-medium text-[#8A90A2] mb-1.5">Username</label>
+            <input
+              id="username"
+              type="text"
+              formControlName="username"
+              autocomplete="username"
+              placeholder="your.username"
+              class="w-full rounded-lg bg-[#12151C] border border-white/10 px-3.5 py-2.5 text-sm text-[#EDEFF3] placeholder:text-[#5A5F6E] outline-none focus:border-[#E8A33D]/60 focus:ring-2 focus:ring-[#E8A33D]/20 transition"
+            />
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label for="password" class="block text-xs font-medium text-[#8A90A2]">Password</label>
+              <button type="button" (click)="togglePassword()" class="text-xs font-mono text-[#5A5F6E] hover:text-[#E8A33D] transition">
+                {{ showPassword ? 'hide' : 'show' }}
+              </button>
+            </div>
+            <input
+              id="password"
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              autocomplete="current-password"
+              placeholder="••••••••"
+              class="w-full rounded-lg bg-[#12151C] border border-white/10 px-3.5 py-2.5 text-sm text-[#EDEFF3] placeholder:text-[#5A5F6E] outline-none focus:border-[#E8A33D]/60 focus:ring-2 focus:ring-[#E8A33D]/20 transition"
+            />
+          </div>
+
+          <p *ngIf="errorMessage" class="text-xs text-[#F0765C] font-mono">{{ errorMessage }}</p>
+
+          <div class="flex items-center justify-between pt-1">
+            <label class="flex items-center gap-2 text-xs text-[#8A90A2] cursor-pointer select-none">
+              <input type="checkbox" formControlName="remember" class="w-3.5 h-3.5 rounded border-white/20 bg-[#12151C] accent-[#E8A33D]">
+              Remember me
+            </label>
+            <a href="#" class="text-xs text-[#8A90A2] hover:text-[#E8A33D] transition">Forgot password?</a>
+          </div>
+
+          <button
+            type="submit"
+            [disabled]="isSubmitting"
+            class="w-full bg-[#E8A33D] hover:bg-[#f0ad48] disabled:opacity-60 text-[#12151C] font-semibold text-sm rounded-lg py-2.5 transition mt-2"
+          >
+            {{ isSubmitting ? 'Checking…' : 'Sign in' }}
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
