@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {CommonModule} from "@angular/common";
-import AuthService from '../../../services/AuthService';
+import { AuthService } from '../../../services/AuthService';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -8,11 +8,10 @@ import AuthService from '../../../services/AuthService';
   templateUrl: './login.html',
 })
 export class Login {
-  auth : AuthService = new AuthService();
-
-  email = "";
-  password = "";
+  constructor(private auth : AuthService){}
+  email = "mohamed";
+  password = "1233";
   onClickLogin(){
-    this.auth.login();
+    console.log(this.auth.login(this.email,this.password));
   }
 }
