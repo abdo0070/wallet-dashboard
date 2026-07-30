@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {CommonModule} from "@angular/common";
 import { AuthService } from '../../../services/AuthService';
+import { UserService } from '../../../services/UserService';
 @Component({
   selector: 'app-login',
   standalone: true,
