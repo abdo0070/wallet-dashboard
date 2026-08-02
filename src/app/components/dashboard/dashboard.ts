@@ -7,4 +7,5 @@ import { InvestList } from "../../invest/invest-list/invest-list";
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {}
+export class Dashboard {
+}

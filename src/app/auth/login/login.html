@@ -37,7 +37,7 @@
     </div>
 
     <!-- Email Login Form -->
-    <form action="#" method="POST" class="space-y-4 relative z-10">
+    <form #loginForm="ngForm" (ngSubmit)="onClickLogin(loginForm)" class="space-y-4 relative z-10" novalidate>
       <div>
         <label
           for="wallet-email"
@@ -47,10 +47,19 @@
         <input
           type="email"
           id="wallet-email"
+          name="email"
           required
+          email
+          [(ngModel)]="email"
+          #emailInput="ngModel"
           placeholder="name@example.com"
           class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition duration-200 text-sm"
         />
+        <!-- Validation Error Message -->
+        <p *ngIf="emailInput.invalid && emailInput.touched" class="mt-1 text-xs text-red-400">
+          <span *ngIf="emailInput.errors?.['required']">Email is required.</span>
+          <span *ngIf="emailInput.errors?.['email']">Please enter a valid email address.</span>
+        </p>
       </div>
 
       <div>
@@ -65,16 +74,25 @@
         <input
           type="password"
           id="wallet-password"
+          name="password"
           required
+          [(ngModel)]="password"
+          #passwordInput="ngModel"
           placeholder="••••••••"
           class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition duration-200 text-sm"
         />
+        <!-- Validation Error Message -->
+        <p *ngIf="passwordInput.invalid && passwordInput.touched" class="mt-1 text-xs text-red-400">
+          Password is required.
+        </p>
       </div>
 
       <div class="flex items-center">
         <input
           type="checkbox"
           id="wallet-remember"
+          name="rememberMe"
+          [(ngModel)]="rememberMe"
           class="w-4 h-4 rounded border-slate-800 bg-slate-950 text-indigo-600 focus:ring-indigo-500 focus:ring-offset-slate-900"
         />
         <label for="wallet-remember" class="ml-2 text-xs text-slate-400"
@@ -84,7 +102,6 @@
 
       <button
         type="submit"
-        (click)="onClickLogin()"
         class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 px-4 rounded-xl shadow-lg shadow-indigo-600/25 transition duration-200 text-sm mt-2"
       >
         Sign In

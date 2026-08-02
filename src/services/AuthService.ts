@@ -1,37 +1,65 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal, Signal } from '@angular/core';
 import { UserService } from './UserService';
-import { User } from '../app/data/User';
+import { User } from '../app/models/User';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root' // Makes the service available throughout the app
+  providedIn: 'root', // Makes the service available throughout the app
 })
 export class AuthService {
-  constructor(private user : UserService,private http: HttpClient){}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {}
   api_url = 'https://localhost:7097';
-  private token : string = '';
-  public login(email:string,password:string) : string {
+  token = signal<string | null>(localStorage.getItem('token'));
+  isAuth = signal<boolean>(false);
+  public login(email: string, password: string) {
     // make request
-    this.http.post(`${this.api_url}/auth`, {
-      Username: email,
-      Password: password,
-    },{responseType : 'text'}).subscribe(res => {
-        this.token = res;
+    this.http
+      .post(
+        `${this.api_url}/auth`,
+        {
+          email: email,
+          Password: password,
+        },
+        { responseType: 'text' },
+      )
+      .subscribe((res) => {
         // store the token in local storage
-        localStorage.setItem("token",this.token);
+        localStorage.setItem('token', res);
+        this.token.set(res);
+        this.isAuth.set(true);
         // load user data
-        this.user.load();
-    });
-    return this.token;
+        this.router.navigateByUrl('/');
+      });
   }
-
-  public register() {
-    
+  public register(user: User) {
+    this.http
+      .post(
+        `${this.api_url}/auth/register`,
+        {
+          username: user.balance,
+          email: user.email,
+          password: user.invest_amount,
+        },
+        { responseType: 'text' },
+      )
+      .subscribe((res) => {
+        // store the token in local storage
+        localStorage.setItem('token', res);
+        this.token.set(res);
+        this.isAuth.set(true);
+        // load user data
+        this.router.navigateByUrl('/');
+      });
   }
-
   public logout() {
     // set user service to null
-    this.user.curUser.set(null);
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
+    this.token.set(null);
+    this.isAuth.set(false);
+    this.router.navigateByUrl('/login');
   }
 }
