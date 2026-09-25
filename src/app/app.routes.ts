@@ -3,10 +3,12 @@ import { Dashboard } from './components/dashboard/dashboard';
 import { Login } from './auth/login/login';
 import { Notfound } from './components/notfound/notfound';
 import { AuthGuard } from '../services/AuthGuard';
+import { Profile } from './components/profile/profile';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: Dashboard, canActivate: [AuthGuard] },
   { path: 'login', component: Login },
+  { path: 'profile', component: Profile },
   { path: '**', component: Notfound },
 ];
