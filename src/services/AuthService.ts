@@ -17,23 +17,14 @@ export class AuthService {
   isAuth = signal<boolean>(false);
   public login(email: string, password: string) {
     // make request
-    this.http
-      .post(
-        `${this.api_url}/auth`,
-        {
-          email: email,
-          Password: password,
-        },
-        { responseType: 'text' },
-      )
-      .subscribe((res) => {
-        // store the token in local storage
-        localStorage.setItem('token', res);
-        this.token.set(res);
-        this.isAuth.set(true);
-        // load user data
-        this.router.navigateByUrl('/');
-      });
+    return this.http.post(
+      `${this.api_url}/auth`,
+      {
+        email: email,
+        Password: password,
+      },
+      { responseType: 'text' },
+    );
   }
   public register(user: User) {
     this.http
@@ -61,5 +52,11 @@ export class AuthService {
     this.token.set(null);
     this.isAuth.set(false);
     this.router.navigateByUrl('/login');
+  }
+  public saveUser(data: any) {
+    localStorage.setItem('token', data);
+    this.token.set(data);
+    this.isAuth.set(true);
+    this.router.navigateByUrl('/');
   }
 }
