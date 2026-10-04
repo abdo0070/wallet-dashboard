@@ -8,4 +8,5 @@ import { InvestList } from "../../invest/invest-list/invest-list";
   styleUrl: './dashboard.css',
 })
 export class Dashboard {
+  
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 
 @Component({
   selector: 'app-alert',
@@ -6,9 +6,9 @@ import { Component, Input, OnChanges, Output, SimpleChanges } from '@angular/cor
   templateUrl: './alert.html',
   styleUrl: './alert.css',
 })
-export class Alert{
-  @Input() show : boolean = false;
-  close() : void{
-    this.show = false;
-  }  
+export class Alert {
+  @Input({ required: true }) show: number = 0;
+  close(): void {
+    this.show = 0;
+  }
 }

@@ -18,7 +18,7 @@ export class Login {
   email = 'mohamed';
   password = '1233';
   rememberMe = null;
-  invalid = signal<boolean>(false);
+  showAlert = signal<number>(0);
 
   onClickLogin(form: NgForm) {
     if (form.invalid) {
@@ -33,7 +33,7 @@ export class Login {
         this.auth.saveUser(res);
       },
       error: (err) => {
-        this.invalid.set(true);
+        this.showAlert.set(this.showAlert()+1);
       },
     });
   }

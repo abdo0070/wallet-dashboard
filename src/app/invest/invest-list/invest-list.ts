@@ -16,8 +16,13 @@ export class InvestList implements OnInit {
   loadInvestmentList(){
       this.user.loadInvestment().subscribe(list => {
         this.investments.set(list);
-        console.log(this.investments);
-        
+        console.log(this.investments().at(0)?.investmentType);
       });
+  }
+  delete() : void{
+    this.user.deleteInvestment(1);
+  }
+  edit() : void{
+    
   }
 }

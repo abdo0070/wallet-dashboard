@@ -1,3 +1,5 @@
-export class InvestmentType{
-    
+export interface InvestmentType{
+  id : number;
+  platform : string;
+  type : string;  
 } 

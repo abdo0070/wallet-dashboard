@@ -35,10 +35,7 @@
       <h2 class="text-2xl font-bold text-white tracking-tight">Welcome to Wallet</h2>
       <p class="text-sm text-slate-400 mt-1">Connect your crypto wallet to continue</p>
     </div>
-    @if (invalid()) {
-      <app-alert [show]="invalid()"></app-alert>
-    }
-
+    <app-alert [show]="showAlert()"></app-alert>
     <!-- Email Login Form -->
     <form
       #loginForm="ngForm"
@@ -117,7 +114,6 @@
         Sign In
       </button>
     </form>
-
     <!-- Footer link -->
     <p class="text-center text-xs text-slate-500 mt-6 relative z-10">
       Don't have a wallet?
