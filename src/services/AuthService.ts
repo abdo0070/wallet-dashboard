@@ -3,6 +3,8 @@ import { Injectable, signal, Signal } from '@angular/core';
 import { UserService } from './UserService';
 import { User } from '../app/models/User';
 import { ActivatedRoute, Router } from '@angular/router';
+import { API_URL } from '../core/env';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root', // Makes the service available throughout the app
@@ -12,13 +14,12 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
   ) {}
-  api_url = 'https://localhost:7097';
   token = signal<string | null>(localStorage.getItem('token'));
   isAuth = signal<boolean>(false);
-  public login(email: string, password: string) {
+  public login(email: string, password: string) : Observable<any> {
     // make request
     return this.http.post(
-      `${this.api_url}/auth`,
+      `${API_URL}/auth`,
       {
         email: email,
         Password: password,
@@ -26,25 +27,25 @@ export class AuthService {
       { responseType: 'text' },
     );
   }
-  public register(user: User) {
-    this.http
+  public register(user: User) : Observable<any>{
+    return this.http
       .post(
-        `${this.api_url}/auth/register`,
+        `${API_URL}/auth/register`,
         {
           username: user.balance,
           email: user.email,
           password: user.invest_amount,
         },
         { responseType: 'text' },
-      )
-      .subscribe((res) => {
-        // store the token in local storage
-        localStorage.setItem('token', res);
-        this.token.set(res);
-        this.isAuth.set(true);
-        // load user data
-        this.router.navigateByUrl('/');
-      });
+      );
+      // .subscribe((res) => {
+      //   // store the token in local storage
+      //   localStorage.setItem('token', res);
+      //   this.token.set(res);
+      //   this.isAuth.set(true);
+      //   // load user data
+      //   this.router.navigateByUrl('/');
+      // });
   }
   public logout() {
     // set user service to null
