@@ -14,7 +14,7 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
   ) {}
-  token = signal<string | null>(localStorage.getItem('token'));
+  public token = signal<string | null>(localStorage.getItem('token'));
   isAuth = signal<boolean>(false);
   public login(email: string, password: string) : Observable<any> {
     // make request

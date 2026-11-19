@@ -8,15 +8,23 @@ import { Home } from './components/home/home';
 import { Register } from './auth/register/register';
 import { About } from './components/about/about';
 import { Contact } from './components/contact/contact';
+import { AuthLayout } from './layout/auth-layout/auth-layout';
+import { GuestLayout } from './layout/guest-layout/guest-layout';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: Dashboard, canActivate: [] },
-  { path: 'home', component: Home },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'auth', component: AuthLayout },
+  { path: 'home', component: GuestLayout ,
+    children:[
+      {path:'about',loadComponent : () =>About},
+      {path:'contact',loadComponent : () =>Contact}
+    ]
+  },
+  /*{ path: 'home', component: Home },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
   { path: 'profile', component: Profile },
   { path: 'about', loadComponent: () => About },
-  { path: 'contact', loadComponent: () => Contact },
+  { path: 'contact', loadComponent: () => Contact },*/
   { path: '**', component: Notfound },
 ];
