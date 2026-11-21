@@ -5,10 +5,11 @@ import { UserService } from '../../../services/UserService';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Alert } from '../../components/alert/alert';
 import { RouterLink } from '@angular/router';
+import { Header } from '../../components/header/header';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, Alert, RouterLink],
+  imports: [CommonModule, FormsModule, Alert, RouterLink, Header],
   templateUrl: './login.html',
 })
 export class Login {

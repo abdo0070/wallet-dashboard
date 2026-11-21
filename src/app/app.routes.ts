@@ -13,18 +13,22 @@ import { GuestLayout } from './layout/guest-layout/guest-layout';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'auth', component: AuthLayout },
-  { path: 'home', component: GuestLayout ,
-    children:[
-      {path:'about',loadComponent : () =>About},
-      {path:'contact',loadComponent : () =>Contact}
-    ]
+  {
+    path: 'auth',
+    component: AuthLayout,
+    // children: [{ path: 'profile', component: Profile }],
   },
-  /*{ path: 'home', component: Home },
-  { path: 'login', component: Login },
-  { path: 'register', component: Register },
-  { path: 'profile', component: Profile },
-  { path: 'about', loadComponent: () => About },
-  { path: 'contact', loadComponent: () => Contact },*/
+  {
+    path: 'home',
+    component: GuestLayout,
+    children: [
+      { path: '', component: Home },
+      { path: 'home', redirectTo: '/home', pathMatch: 'full' },
+      { path: 'about', loadComponent: () => About },
+      { path: 'contact', loadComponent: () => Contact },
+    ],
+  },
+  { path: 'login', loadComponent: () => Login },
+  { path: 'register', loadComponent: () => Register },
   { path: '**', component: Notfound },
 ];
